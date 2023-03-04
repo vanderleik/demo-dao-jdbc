@@ -4,6 +4,7 @@ import model.dao.DaoFactory;
 import model.dao.SellerDao;
 import model.entities.Department;
 import model.entities.Seller;
+import model.utils.TranslationsConstants;
 
 import java.util.Date;
 import java.util.List;
@@ -46,14 +47,14 @@ public class Program {
 
         sellerDao.update(seller);
 
-        System.out.println("Update completedd!");
+        System.out.println(TranslationsConstants.UPDATE_COMPLETED);
 
         System.out.println("\n=== TEST 6: seller delete ===");
         System.out.print("Enter id for delete test: ");
         int id = sc.nextInt();
         sellerDao.deleteById(id);
 
-        System.out.println("Delete completedd!");
+        System.out.println(TranslationsConstants.DELETE_COMPLETED);
 
         sc.close();
     }
