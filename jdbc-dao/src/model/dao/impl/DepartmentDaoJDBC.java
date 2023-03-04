@@ -8,6 +8,7 @@ import model.utils.TranslationsConstants;
 
 import java.sql.*;
 import java.util.List;
+import java.util.Objects;
 
 public class DepartmentDaoJDBC implements DepartmentDao {
     private Connection conn;
@@ -19,6 +20,9 @@ public class DepartmentDaoJDBC implements DepartmentDao {
     @Override
     public void insert(Department obj) {
         PreparedStatement st = null;
+        if (Objects.isNull(obj.getName())) {
+            throw new DbException(TranslationsConstants.NAME_NULL);
+        }
         try {
             st = conn.prepareStatement(
                     "INSERT INTO department " +
@@ -26,6 +30,7 @@ public class DepartmentDaoJDBC implements DepartmentDao {
                         "VALUES(?);",
                     Statement.RETURN_GENERATED_KEYS);//Retorna o id do departamento criado
         st.setString(1, obj.getName());
+
         int rowsAffected = st.executeUpdate();
         if (rowsAffected > 0) {
             ResultSet rs = st.getGeneratedKeys();
