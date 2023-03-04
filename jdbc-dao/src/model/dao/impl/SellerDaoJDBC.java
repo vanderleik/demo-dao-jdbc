@@ -5,12 +5,15 @@ import db.DbException;
 import model.dao.SellerDao;
 import model.entities.Department;
 import model.entities.Seller;
+import model.utils.TranslationsConstants;
 
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class SellerDaoJDBC implements SellerDao {
-
     private Connection conn;
 
     public SellerDaoJDBC(Connection conn) {
@@ -43,7 +46,7 @@ public class SellerDaoJDBC implements SellerDao {
                 }
                 DB.closeResultSet(rs);
             } else {
-                throw new DbException("Unexpected error! No rows affected");
+                throw new DbException("Unexpected error! " + TranslationsConstants.NO_ROWS_AFFECTED);
             }
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
